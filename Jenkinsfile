@@ -28,7 +28,7 @@ pipeline {
                 sh '''
                     ssh jenkins@jason-deploy-2 <<EOF
                     export PORT=${PORT}
-                    export VERSION=${PORT}
+                    export VERSION=${BUILD_NUMBER}
                     docker network inspect lbg-net && echo "network exists" || docker network create lbg-net
                     docker pull jasonatkins/lbg
                     docker pull jasonatkins/lbg-nginx
