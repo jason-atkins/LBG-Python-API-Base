@@ -21,14 +21,15 @@ pipeline {
             steps {
                 sh '''
                     ssh jenkins@jason-deploy-2 <<EOF
+                    docket network inspect lbg-net && echo "network exists" || docket network create lbg-net
                     docker pull jasonatkins/lbg
                     docker pull jasonatkins/lbg-nginx
                     docker stop lbg-nginx && echo "Stopped lbg-nginx" || echo "lbg-nginx is not running"
                     docker rm lbg-nginx && echo "removed lbg-nginx" || echo "lbg-nginx does not exist"
                     docker stop lbg-app && echo "Stopped lbg-app" || echo "lbg-app is not running"
                     docker rm lbg-app && echo "removed lbg-app" || echo "lbg-app does not exist"
-                    docker run -d  --name lbg-app jasonatkins/lbg
-                    docker run -d  --name lbg-nginx -p 80:80 jasonatkins/lbg-nginx
+                    docker run -d  --name lbg-app --network lbg-net jasonatkins/lbg
+                    docker run -d  --name lbg-nginx -p 80:80 --network lbg-net  jasonatkins/lbg-nginx
                 '''
             }
         }
