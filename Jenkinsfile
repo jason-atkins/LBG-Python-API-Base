@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                    docker build -t jasonatkins/lbg .
+                docker build -t jasonatkins/lbg .
                 '''
            }
         }
@@ -14,6 +14,7 @@ pipeline {
                 docker push jasonatkins/lbg
                 '''
             }
+        }
         stage('Deploy') {
             steps {
                 sh '''
