@@ -22,7 +22,7 @@ pipeline {
                     docker pull jasonatkins/lbg
                     docker stop lbg && echo "Stopped lbg" || echo "lbg is not running"
                     docker rm lbg && echo "removed lbg" || echo "lbg does not exist"
-                    docker run -d  --name lbg-app  jasonatkins/lbg
+                    docker run -d  --name lbg-app -p 80:80 jasonatkins/lbg
                 '''
             }
         }
