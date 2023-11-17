@@ -21,7 +21,7 @@ pipeline {
             steps {
                 sh '''
                     ssh jenkins@jason-deploy-2 <<EOF
-                    docket network inspect lbg-net && echo "network exists" || docket network create lbg-net
+                    docker network inspect lbg-net && echo "network exists" || docker network create lbg-net
                     docker pull jasonatkins/lbg
                     docker pull jasonatkins/lbg-nginx
                     docker stop lbg-nginx && echo "Stopped lbg-nginx" || echo "lbg-nginx is not running"
