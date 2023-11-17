@@ -34,7 +34,8 @@ pipeline {
                     {
                         listen 80;
                         location / {
-                        proxy_pass http://lbg-app:${PORT};
+                            proxy_pass http://lbg-app:${PORT};
+                        }
                     }
                 }
                 '''
