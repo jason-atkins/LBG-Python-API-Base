@@ -9,14 +9,15 @@ from flask_api import status
 # import SQL Alchemy (including ORM - Object-relational Mapper - and its data mapper pattern)
 from models import db, ItemModel
 from sqlalchemy import exc
+import os
 
 # JavaScript/ES6 text/plain MIME Content type fix (avoids registry hack!)
 import mimetypes
 mimetypes.add_type('text/javascript', '.js')
 
 # set up the app with listening socket for http requests and appropriate hostname
-PORT = 8080
-HOST = '0.0.0.0'
+#PORT = 8080 
+#HOST = '0.0.0.0'
 
 # get app to serve static files from the public directory
 app = Flask(__name__, static_url_path=f'/', static_folder='./static')
