@@ -5,6 +5,7 @@ pipeline {
             steps {
                 sh '''
                 docker build -t jasonatkins/lbg .
+                docker build -t jasonatkins/lbg-nginx nginx
                 '''
            }
         }
@@ -12,6 +13,7 @@ pipeline {
             steps {
                 sh '''
                 docker push jasonatkins/lbg
+                docker push jasonatkins/lbg-nginx
                 '''
             }
         }
@@ -20,9 +22,13 @@ pipeline {
                 sh '''
                     ssh jenkins@jason-deploy-2 <<EOF
                     docker pull jasonatkins/lbg
+                    docker pull jasonatkins/lbg-nginx
+                    docker stop lbg-nginx && echo "Stopped lbg-nginx" || echo "lbg-v is not running"
+                    docker rm lbg-nginx && echo "removed lbg-nginx" || echo "lbg-nginx does not exist"
                     docker stop lbg-app && echo "Stopped lbg-app" || echo "lbg-app is not running"
                     docker rm lbg-app && echo "removed lbg-app" || echo "lbg-app does not exist"
-                    docker run -d  --name lbg-app -p 80:8080 jasonatkins/lbg
+                    docker run -d  --name lbg-app jasonatkins/lbg
+                    docker run -d  --name lbg-nginx -p 80:80 jasonatkins/lbg-nginx
                 '''
             }
         }
