@@ -23,7 +23,7 @@ pipeline {
                     ssh jenkins@jason-deploy-2 <<EOF
                     docker pull jasonatkins/lbg
                     docker pull jasonatkins/lbg-nginx
-                    docker stop lbg-nginx && echo "Stopped lbg-nginx" || echo "lbg-v is not running"
+                    docker stop lbg-nginx && echo "Stopped lbg-nginx" || echo "lbg-nginx is not running"
                     docker rm lbg-nginx && echo "removed lbg-nginx" || echo "lbg-nginx does not exist"
                     docker stop lbg-app && echo "Stopped lbg-app" || echo "lbg-app is not running"
                     docker rm lbg-app && echo "removed lbg-app" || echo "lbg-app does not exist"
