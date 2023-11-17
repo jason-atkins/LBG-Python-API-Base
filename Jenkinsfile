@@ -19,7 +19,7 @@ pipeline {
                 docker push jasonatkins/lbg:${BUILD_NUMBER}
                 docker push jasonatkins/lbg-nginx
                 docker rmi jasonatkins/lbg:${BUILD_NUMBER}
-                docker rmi jasonatkins/nginx:${BUILD_NUMBER}
+                docker rmi jasonatkins/nginx
                 '''
             }
         }
