@@ -23,9 +23,27 @@ pipeline {
                 '''
             }
         }
+
+        stage ("generate nginx.conf"){
+            steps{
+                sh '''
+                cat - > nginx.conf <<EOF
+                events{}
+                http{
+                    server
+                    {
+                        listen 80;
+                        location / {
+                        proxy_pass http://lbg-app:${PORT};
+                    }
+                }
+                '''
+            }
+        }
         stage('Deploy') {
             steps {
                 sh '''
+                    scp nginx.conf jenkins@jason-deploy-2:/home/jenkins/nginx.conf 
                     ssh jenkins@jason-deploy-2 <<EOF
                     export PORT=${PORT}
                     export VERSION=${BUILD_NUMBER}
@@ -36,8 +54,8 @@ pipeline {
                     docker rm lbg-nginx && echo "removed lbg-nginx" || echo "lbg-nginx does not exist"
                     docker stop lbg-app && echo "Stopped lbg-app" || echo "lbg-app is not running"
                     docker rm lbg-app && echo "removed lbg-app" || echo "lbg-app does not exist"
-                    docker run -d  --name lbg-app --network lbg-net jasonatkins/lbg:${VERSION}
-                    docker run -d  --name lbg-nginx -p 80:${PORT} --network lbg-net  jasonatkins/lbg-nginx
+                    docker run -d -e PORT=${PORT} --name lbg-app --network lbg-net jasonatkins/lbg:${VERSION}
+                    docker run -d  --name lbg-nginx -p 80:80 --network lbg-net  --mount type=bind,source=/home/jenkins/nginx.conf,target=/etc/nginx/nginx.conf jasonatkins/lbg-nginx
                 '''
             }
         }
