@@ -54,7 +54,7 @@ pipeline {
                     docker rm lbg-nginx && echo "removed lbg-nginx" || echo "lbg-nginx does not exist"
                     docker stop lbg-app && echo "Stopped lbg-app" || echo "lbg-app is not running"
                     docker rm lbg-app && echo "removed lbg-app" || echo "lbg-app does not exist"
-                    docker run -d -e PORT=${PORT} --name lbg-app --network lbg-net jasonatkins/lbg:${VERSION}
+                    docker run -d -e PORT=${PORT} --name lbg-app --network lbg-net jasonatkins/lbg
                     docker run -d  --name lbg-nginx -p 80:80 --network lbg-net  --mount type=bind,source=/home/jenkins/nginx.conf,target=/etc/nginx/nginx.conf jasonatkins/lbg-nginx
                 '''
             }
