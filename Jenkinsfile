@@ -20,8 +20,8 @@ pipeline {
                 sh '''
                     ssh jenkins@jason-deploy-2 <<EOF
                     docker pull jasonatkins/lbg
-                    docker stop lbg && echo "Stopped lbg" || echo "lbg is not running"
-                    docker rm lbg && echo "removed lbg" || echo "lbg does not exist"
+                    docker stop lbg-app && echo "Stopped lbg-app" || echo "lbg-app is not running"
+                    docker rm lbg-app && echo "removed lbg-app" || echo "lbg-app does not exist"
                     docker run -d  --name lbg-app -p 80:8080 jasonatkins/lbg
                 '''
             }
