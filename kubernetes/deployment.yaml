@@ -24,18 +24,18 @@ spec:
   selector:
     matchLabels:
       app: flask
-    strategy: 
-      rollingUpdate: 
-        maxSurge: 20%
-        maxUnavailable: 20%
-      template:
-        metadata:
-          labels:
-            app: flask
-        spec: 
-          containers: 
-            - name: flask-container
-              image: gcr.io/lbg-mea-15/lbg-python-api-base-image-from-jenkins:latest
-              imagePullPolicy: Always
-              ports:
-              - containerPort: 8080
+  strategy: 
+    rollingUpdate: 
+      maxSurge: 20%
+      maxUnavailable: 20%
+    template:
+      metadata:
+        labels:
+          app: flask
+      spec: 
+        containers: 
+          - name: flask-container
+            image: gcr.io/lbg-mea-15/lbg-python-api-base-image-from-jenkins:latest
+            imagePullPolicy: Always
+            ports:
+            - containerPort: 8080
