@@ -11,7 +11,7 @@ from flask_api import status
 import requests
 
 PORT = 8080
-BASE_URL = f"http://localhost:{PORT}"
+BASE_URL = getenv(STAGING_IP)     # f"http://localhost:{PORT}"
 
 class MyLbgApiTestCase(unittest.TestCase):
 
