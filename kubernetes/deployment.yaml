@@ -35,7 +35,7 @@ spec:
     spec: 
       containers: 
         - name: flask-container
-          image: gcr.io/lbg-mea-15/lbg-python-api-base-image-from-jenkins:latest
+          image: gcr.io/lbg-mea-15/lbg-python-api-base-image-from-jenkins:v37
           imagePullPolicy: Always
           ports:
           - containerPort: 8080
