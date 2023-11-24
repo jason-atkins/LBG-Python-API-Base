@@ -7,7 +7,7 @@ pipeline {
         PROJECT_ID="lbg-mea-15"
         CLUSTER_NAME="jason-cluster"
         LOCATION="europe-west2-c"
-        CREDENTIALS_ID="JenkinsKubernetesDeveloperKeyId"
+        CREDENTIALS_ID="37200621-893f-4618-82c4-58eac17b3994"
     }
     stages {
         stage('Build and Push to GCR')
