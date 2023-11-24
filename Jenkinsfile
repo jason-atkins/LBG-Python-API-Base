@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build and Push to GCR')
         {
-            step('')
+            steps
             {
                 script
                 {
